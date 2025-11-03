@@ -1,0 +1,93 @@
+:root {
+  --bg: #fff9ec;
+  --card: #ffffff;
+  --ink: #3d2c22;
+  --accent: #f6c85f;
+  --accent-2: #ff9e6d;
+  --ring-bg: #fde8bf;
+  --ring-fg: #ffb84d;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0; font-family: ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--ink); background: var(--bg);
+  display: grid; place-items: center;
+}
+
+main { width: min(680px, 92vw); }
+
+header { text-align: center; margin: 16px 0 8px; }
+h1 { margin: 0; font-size: 1.9rem; }
+
+.timer-card {
+  background: var(--card);
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.07);
+}
+
+.egg-wrap {
+  display: grid; place-items: center; gap: 18px;
+}
+
+.egg {
+  width: 160px; height: 208px;
+  animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.12));
+}
+@keyframes float {
+  0%,100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-6px) rotate(1deg); }
+}
+.egg.cracking {
+  animation: crack-wiggle .25s ease-in-out 8;
+}
+@keyframes crack-wiggle {
+  0%,100% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  75% { transform: rotate(-2deg); }
+}
+
+.ring { position: relative; width: 220px; height: 220px; }
+.ring::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: radial-gradient(circle at 50% 55%, #fff 0 40%, transparent 41%),
+              conic-gradient(var(--ring-fg) 0deg, var(--ring-fg) 0deg, var(--ring-bg) 0deg 360deg);
+  box-shadow: inset 0 0 0 10px #fff;
+}
+.ring-fill { position: absolute; inset: 0; border-radius: 50%; }
+.time {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font-weight: 700; font-size: 1.8rem;
+}
+
+.preset-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 16px 0 8px;
+}
+button {
+  appearance: none; border: 0; padding: 12px 14px; border-radius: 14px;
+  background: #f2efe9; color: var(--ink); font-weight: 600; cursor: pointer;
+}
+button.primary { background: linear-gradient(180deg, var(--accent), var(--accent-2)); color: #3b240e; }
+button:active { transform: translateY(1px); }
+
+.custom { display: flex; gap: 10px; align-items: center; justify-content: center; margin: 8px 0 10px; }
+.custom input { width: 72px; padding: 8px 10px; border-radius: 10px; border: 1px solid #e6dbc6; }
+.controls { display: flex; gap: 10px; justify-content: center; margin: 10px 0 6px; }
+.sound-toggle { display: flex; gap: 8px; align-items: center; justify-content: center; margin-top: 6px; }
+
+footer { text-align: center; opacity: .7; margin-top: 10px; }
+
+#confetti {
+  pointer-events: none; position: fixed; inset: 0; overflow: hidden;
+}
+.confetto {
+  position: absolute; width: 10px; height: 16px; border-radius: 3px;
+  opacity: .9; transform: translate(-50%, -50%);
+  animation: fall linear forwards;
+}
+@keyframes fall {
+  to { transform: translate(var(--x,0), 110vh) rotate(720deg); }
+}

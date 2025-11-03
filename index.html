@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Egg Timer 🥚</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+  <meta name="theme-color" content="#ffe9a8">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Egg Timer 🥚⏱️</h1>
+      <p>Choose your egg, then tap Start.</p>
+    </header>
+
+    <section class="timer-card">
+      <div class="egg-wrap">
+        <!-- Cute egg (SVG) -->
+        <svg class="egg" viewBox="0 0 200 260" aria-hidden="true">
+          <defs>
+            <radialGradient id="eggShine" cx="35%" cy="30%" r="60%">
+              <stop offset="0%" stop-color="#fff9e6" />
+              <stop offset="70%" stop-color="#ffe9a8" />
+              <stop offset="100%" stop-color="#ffd980" />
+            </radialGradient>
+          </defs>
+          <ellipse cx="100" cy="130" rx="78" ry="110" fill="url(#eggShine)"/>
+          <!-- Crack lines appear at finish -->
+          <path id="crack" d="M70 140 L85 150 L95 140 L110 155 L125 145" stroke="#b87f3c" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0"/>
+        </svg>
+
+        <!-- Circular progress ring -->
+        <div class="ring">
+          <div class="ring-fill" id="ringFill"></div>
+          <div class="time" id="timeLeft">00:00</div>
+        </div>
+      </div>
+
+      <div class="preset-grid">
+        <button data-min="6">Soft 6:00</button>
+        <button data-min="9">Medium 9:00</button>
+        <button data-min="12">Hard 12:00</button>
+      </div>
+
+      <form id="customForm" class="custom">
+        <label>
+          Custom (min):
+          <input id="customMin" type="number" min="1" max="60" value="3" />
+        </label>
+        <button type="submit">Set</button>
+      </form>
+
+      <div class="controls">
+        <button id="startBtn" class="primary">Start</button>
+        <button id="pauseBtn">Pause</button>
+        <button id="resetBtn">Reset</button>
+      </div>
+
+      <label class="sound-toggle">
+        <input type="checkbox" id="soundOn" checked> Cute sounds on
+      </label>
+    </section>
+
+    <footer>
+      <small>Tip: keep the app on-screen for reliable timing on iOS.</small>
+    </footer>
+  </main>
+
+  <div id="confetti" aria-hidden="true"></div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js');
+    }
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
